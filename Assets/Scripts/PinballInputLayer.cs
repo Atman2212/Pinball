@@ -18,7 +18,8 @@ public static class PinballInputLayer
                 return input.Controls.LeftFlipper.ReadValue<float>() > 0.5f;
             case PinballAction.RIGHT_FLIPPER:
                 return input.Controls.RightFlipper.ReadValue<float>() > 0.5f;
-            // Add more cases as needed
+            case PinballAction.PLUNGER:
+                return input.Controls.Plunger.ReadValue<float>() > 0.5f;
             default:
                 return false;
         }

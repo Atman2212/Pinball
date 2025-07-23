@@ -42,7 +42,7 @@ public class GapCoverHandler : MonoBehaviour
             yield return null;
         }
 
-        sr.color = startColor; // reset just before removal (optional)
+        sr.color = startColor; // reset just before removal
     }
 
     void RemoveCover() => Destroy(gameObject);

@@ -624,6 +624,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Plunger"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea2c69b5-50fd-43d2-9fd8-c5dda67fed5e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -668,6 +677,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""RightFlipper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67cbb438-2fb6-49e7-93f3-02326b8cddbb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Plunger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9f7dc90-c24d-481b-81e2-9229e0ad1e78"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Plunger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -753,6 +784,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_LeftFlipper = m_Controls.FindAction("LeftFlipper", throwIfNotFound: true);
         m_Controls_RightFlipper = m_Controls.FindAction("RightFlipper", throwIfNotFound: true);
+        m_Controls_Plunger = m_Controls.FindAction("Plunger", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1031,6 +1063,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IControlsActions> m_ControlsActionsCallbackInterfaces = new List<IControlsActions>();
     private readonly InputAction m_Controls_LeftFlipper;
     private readonly InputAction m_Controls_RightFlipper;
+    private readonly InputAction m_Controls_Plunger;
     /// <summary>
     /// Provides access to input actions defined in input action map "Controls".
     /// </summary>
@@ -1050,6 +1083,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Controls/RightFlipper".
         /// </summary>
         public InputAction @RightFlipper => m_Wrapper.m_Controls_RightFlipper;
+        /// <summary>
+        /// Provides access to the underlying input action "Controls/Plunger".
+        /// </summary>
+        public InputAction @Plunger => m_Wrapper.m_Controls_Plunger;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1082,6 +1119,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RightFlipper.started += instance.OnRightFlipper;
             @RightFlipper.performed += instance.OnRightFlipper;
             @RightFlipper.canceled += instance.OnRightFlipper;
+            @Plunger.started += instance.OnPlunger;
+            @Plunger.performed += instance.OnPlunger;
+            @Plunger.canceled += instance.OnPlunger;
         }
 
         /// <summary>
@@ -1099,6 +1139,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RightFlipper.started -= instance.OnRightFlipper;
             @RightFlipper.performed -= instance.OnRightFlipper;
             @RightFlipper.canceled -= instance.OnRightFlipper;
+            @Plunger.started -= instance.OnPlunger;
+            @Plunger.performed -= instance.OnPlunger;
+            @Plunger.canceled -= instance.OnPlunger;
         }
 
         /// <summary>
@@ -1296,5 +1339,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightFlipper(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Plunger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlunger(InputAction.CallbackContext context);
     }
 }
