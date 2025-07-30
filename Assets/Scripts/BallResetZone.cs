@@ -11,6 +11,7 @@ public class BallResetZone : MonoBehaviour
             Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
             rb.linearVelocity = Vector2.zero;
             other.transform.position = resetPoint.position;
+            PinballGameManager.Instance.OnBallReset();
         }
     }
 }

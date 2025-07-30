@@ -11,7 +11,7 @@ public class Plunger : MonoBehaviour
 
     private Vector2 startPos;
     private Rigidbody2D rb;
-    private bool isPulling = false;
+    private bool awaitingLaunch = false;
     private float currentPull = 0f;
 
     private void Start()
@@ -24,14 +24,14 @@ public class Plunger : MonoBehaviour
     {
         if (PinballInputLayer.IsHeld(PinballAction.PLUNGER))
         {
-            isPulling = true;
+            awaitingLaunch = true;
             currentPull = Mathf.Min(currentPull + Time.deltaTime * pullSpeed, maxPullDistance);
             Vector2 pullPos = startPos - new Vector2(0, currentPull);
             rb.MovePosition(pullPos);
         }
-        else if (isPulling)
+        else if (awaitingLaunch)
         {
-            isPulling = false;
+            awaitingLaunch = false;
             StartCoroutine(ReleasePlunger());
         }
     }
