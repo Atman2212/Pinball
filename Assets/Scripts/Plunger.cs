@@ -2,15 +2,20 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))] // <-- Make sure AudioSource is attached
 public class Plunger : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float pullSpeed = 4f;
-    [SerializeField] private float releaseSpeed = 20f;
     [SerializeField] private float maxPullDistance = 2f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip launchSFX;
+    [SerializeField] private float launchVolume = 1f;
 
     private Vector2 startPos;
     private Rigidbody2D rb;
+    private AudioSource audioSource;
     private bool awaitingLaunch = false;
     private float currentPull = 0f;
 
@@ -18,6 +23,7 @@ public class Plunger : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPos = rb.position;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -32,6 +38,11 @@ public class Plunger : MonoBehaviour
         else if (awaitingLaunch)
         {
             awaitingLaunch = false;
+
+            // Play the launch sound
+            if (launchSFX != null && audioSource != null)
+                audioSource.PlayOneShot(launchSFX, launchVolume);
+
             StartCoroutine(ReleasePlunger());
         }
     }

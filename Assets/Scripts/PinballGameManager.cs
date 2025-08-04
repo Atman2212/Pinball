@@ -7,6 +7,9 @@ public class PinballGameManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject plungerBlocker;
     [SerializeField] private PlungerExitTrigger plungerExitTrigger;
+    [SerializeField] public Canvas worldCanvas;
+    [SerializeField] public GameObject damageTextUIPrefab;
+    private int totalDamage = 0;
 
     private void Awake()
     {
@@ -39,5 +42,16 @@ public class PinballGameManager : MonoBehaviour
     private void DisablePlungerBlocker()
     {
         plungerBlocker.SetActive(false);
+    }
+
+    public void AddDamage(int amount)
+    {
+        totalDamage += amount;
+        Debug.Log($"Total Damage: {totalDamage}");
+    }
+
+    public int GetTotalDamage()
+    {
+        return totalDamage;
     }
 }
